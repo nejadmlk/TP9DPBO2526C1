@@ -118,13 +118,13 @@ Koneksi database dikelola melalui class DB yang terdapat pada folder models. Sem
 
 ### Desain Framework
 
-<img src="Diagram.png" width="100%">
+<img src="DIagram.png" width="100%">
 
 
 # Dokumentasi
 
 ## page kandidat
-<img src="Dokumentasipage Kandidat.gif" width="100%">
+<img src="Dokumentasi/page Kandidat.gif" width="100%">
 
 ## page departemen
 <img src="Dokumentasi/page Departemen.gif" width="100%">
