@@ -6,96 +6,125 @@ Saya Nezhad Ahmad Maliki dengan NIM 2503880 mengerjakan Tugas Praktikum 9 pada M
 ```
 C:.
 │   index.php
-│   style.css
+│   mvp_db.sql
+│   README.md
 │
-├───class
-│       Brand.php
-│       Database.php
-│       Kategori.php
-│       Produk.php
+├───models
+│       DB.php
+│       Departemen.php
+│       DetailDepartemen.php
+│       Kandidat.php
+│       KontrakModel.php
+│       TabelDepartemen.php
+│       TabelKandidat.php
 │
-├───config
-│       database.php
+├───presenters
+│       KontrakDepartemen.php
+│       KontrakPresenter.php
+│       PresenterDepartemen.php
+│       PresenterKandidat.php
 │
-├───database
-│       db_figure.sql
+├───template
+│       form.html
+│       form_departemen.html
+│       skin.html
+│       skin_departemen.html
 │
-├───uploads
-│       chopper.jpg
-│       ironman.jpeg
-│       power.jpg
-│
-└───view
-        brand.php
-        dashboard.php
-        detail_produk.php
-        form_produk.php
-        kategori.php
-        produk.php
+└───views
+        KontrakView.php
+        ViewDepartemen.php
+        ViewKandidat.php
 ```
 
 # Fungsi program & Alur Program
+# Fungsi program & Alur Program
+Program pengelolaan data Lectures dan Courses dibuat untuk membantu pengguna dalam mengelola data dosen dan mata kuliah melalui sebuah website. Program ini menyediakan fitur untuk menampilkan, menambahkan, mengubah, dan menghapus data yang tersimpan di dalam database.
 
-## Tujuan dibuatnya program Koleksi Aing adalah untuk mengelola data koleksi action figure agar pengguna dapat menyimpan, melihat, menambahkan, mengubah, dan menghapus data koleksi dengan lebih mudah. Program ini memiliki ruang lingkup pengelolaan data koleksi figure, mulai dari nama produk, brand, kategori, jumlah unit, harga, hingga gambar produk.
+Program ini memiliki dua bagian utama, yaitu pengelolaan data Lectures dan pengelolaan data Courses. Pada bagian Lectures, pengguna dapat mengelola informasi dosen, seperti nama, NIDN, nomor telepon, dan tanggal bergabung. Sementara itu, pada bagian Courses, pengguna dapat mengelola informasi mata kuliah, seperti nama mata kuliah, kode mata kuliah, jumlah SKS, serta dosen pengampu.
+
+Program ini dibuat menggunakan bahasa pemrograman PHP dengan konsep Object-Oriented Programming (OOP), menerapkan pola arsitektur Model-View-Controller (MVC), serta menggunakan MySQL sebagai database untuk menyimpan seluruh data.
 
 Program ini dibuat menggunakan PHP dengan konsep Object-Oriented Programming (OOP) dan database MySQL sebagai tempat penyimpanan seluruh data.
 
 ### Desain Class
-Program ini menggunakan beberapa class yang memiliki tugas masing-masing. Atribut yang bersifat internal dibuat private, sehingga akses dan pengelolaan datanya dilakukan melalui method yang tersedia.
-- Class Database: Bertugas untuk mengatur koneksi antara program PHP dengan database MySQL menggunakan PDO.
-- Class Brand: Bertugas untuk mengelola data brand figure, seperti menampilkan dan mengolah data brand.
-- Class Kategori: Bertugas untuk mengelola data kategori figure.
-- Class Produk: Bertugas untuk mengelola data produk figure, seperti menampilkan, mencari, menambahkan, mengubah, menghapus, dan mengambil statistik produk.
-Class-class tersebut dipisahkan agar setiap class memiliki tanggung jawab masing-masing dan kode program lebih mudah dikelola.
+Program ini menggunakan beberapa class yang memiliki tugas dan tanggung jawab masing-masing. Setiap class dipisahkan ke dalam folder berdasarkan fungsinya agar kode program lebih terstruktur dan mudah dikelola.
+
+Berikut merupakan penjelasan class yang digunakan:
+
+##Folder Model :
+
+Class DB: Bertugas untuk mengatur koneksi antara program PHP dengan database MySQL, menjalankan perintah SQL, dan mengambil hasil query.
+
+Class Kandidat: Bertugas untuk merepresentasikan data kandidat, seperti ID, nama, posisi, domisili, skor tes, dan pengalaman tahun.
+
+Class TabelKandidat: Bertugas untuk mengelola data kandidat, seperti menampilkan seluruh data, mengambil data berdasarkan ID, menambahkan, mengubah, dan menghapus data kandidat.
+
+Class Departemen: Bertugas untuk merepresentasikan data departemen, seperti ID departemen, nama departemen, nama ketua departemen, dan lokasi departemen.
+
+Class TabelDepartemen: Bertugas untuk mengelola data departemen, seperti menampilkan seluruh data, mengambil data berdasarkan ID, menambahkan, mengubah, dan menghapus data departemen.
+
+##Folder Presenter :
+
+Class PresenterKandidat: Bertugas untuk mengatur alur pengelolaan data kandidat. Presenter mengambil data dari Model, mengolah data yang diperlukan, dan mengirimkan hasilnya ke View untuk ditampilkan.
+
+Class PresenterDepartemen: Bertugas untuk mengatur alur pengelolaan data departemen dengan mengambil data dari Model, mengolahnya, dan mengirimkan hasilnya ke View.
+
+##Folder View
+
+Class ViewKandidat: Bertugas untuk menampilkan halaman pengelolaan data kandidat, termasuk tabel data kandidat serta form tambah dan edit.
+
+Class ViewDepartemen: Bertugas untuk menampilkan halaman pengelolaan data departemen, termasuk tabel data departemen serta form tambah dan edit.
+
+##Interface
+Class KontrakModel, DetailDepartemen, KontrakView, KontrakPresenter, dan KontrakDepartemen: Bertugas sebagai interface yang menentukan method atau aturan yang harus diterapkan oleh class yang mengimplementasikannya.
 
 ### Alur Program (Flow Kode), Alur Design
 
-Alur program Koleksi Aing dimulai ketika pengguna membuka website. Pengguna akan diarahkan ke halaman dashboard yang menampilkan ringkasan koleksi, seperti jumlah jenis produk, total unit koleksi, jumlah brand, dan total nilai pembelian. Selain itu, dashboard juga menampilkan beberapa produk terbaru yang tersimpan di dalam database.
+Alur program dimulai ketika pengguna membuka website melalui file index.php. File tersebut berfungsi sebagai pintu masuk utama program untuk mengakses halaman pengelolaan data Kandidat dan Departemen. Selanjutnya, index.php memanggil Model, View, dan Presenter yang diperlukan untuk menjalankan program.
 
-Pada bagian navigasi, pengguna dapat berpindah ke beberapa halaman, yaitu dashboard, produk, brand, dan kategori.
+Pada halaman Kandidat, program menampilkan data kandidat yang diambil dari database. Pengguna dapat melakukan beberapa tindakan, yaitu:
 
-Pada halaman produk, pengguna dapat melihat seluruh data koleksi figure yang tersimpan di dalam database. Pengguna juga dapat menambahkan produk baru dengan mengisi informasi yang diperlukan, seperti nama produk, brand, kategori, jumlah unit, harga, dan gambar produk.
+Menampilkan data (Read)
 
-Selain menambahkan data, pengguna juga dapat mengubah dan menghapus data produk yang sudah tersimpan. Ketika pengguna memilih salah satu produk, pengguna dapat melihat informasi produk tersebut secara lebih lengkap melalui halaman detail produk. Pengguna juga dapat melakukan perubahan data atau menghapus produk sesuai kebutuhan.
+PresenterKandidat memanggil method pada TabelKandidat untuk mengambil seluruh data kandidat dari database. Data yang diperoleh kemudian diolah oleh PresenterKandidat dan dikirimkan ke ViewKandidat untuk ditampilkan dalam bentuk tabel.
 
-Untuk halaman brand dan kategori, pengguna dapat mengelola data brand dan kategori yang digunakan dalam pengelompokan produk. Data tersebut nantinya berhubungan dengan data produk sehingga informasi koleksi dapat tersusun dengan lebih teratur.
+Menambahkan data (Create)
 
-Seluruh proses pengelolaan data dilakukan dengan menghubungkan halaman utama melalui index.php dengan class yang sudah dibuat. Ketika pengguna melakukan suatu tindakan, program akan memproses permintaan tersebut dan menjalankan method yang sesuai. Setelah proses berhasil, data akan diperbarui dan ditampilkan kembali pada halaman website.
+Pengguna mengisi form yang tersedia dengan informasi kandidat. Setelah tombol Simpan ditekan, data dikirim melalui method POST ke index.php. Selanjutnya, PresenterKandidat memanggil method tambah pada TabelKandidat untuk menyimpan data kandidat ke database.
 
+Mengubah data (Update)
 
-### Alur Database dan Konfigurasi
-Program ini menggunakan database MySQL dengan nama database db_figure untuk menyimpan seluruh data yang digunakan.
+Pengguna memilih tombol Edit pada salah satu data kandidat. Program mengambil data berdasarkan ID melalui TabelKandidat, kemudian PresenterKandidat mengirimkan data tersebut ke ViewKandidat untuk ditampilkan kembali ke dalam form. Setelah pengguna mengubah informasi dan menekan tombol Update, PresenterKandidat memanggil method update pada TabelKandidat untuk memperbarui data di database.
 
-Koneksi database dikelola melalui class Database.php, sedangkan file config/database.php digunakan untuk menginisialisasi koneksi dan objek dari class yang diperlukan, seperti Brand, Kategori, dan Produk.
+Menghapus data (Delete)
 
-Dengan cara tersebut, setiap halaman tidak perlu membuat koneksi database secara berulang. Halaman cukup menggunakan objek yang sudah disiapkan melalui file konfigurasi.
+Pengguna memilih tombol Hapus pada data kandidat yang ingin dihapus. ID kandidat dikirim melalui method POST ke index.php. Selanjutnya, PresenterKandidat memanggil method delete pada TabelKandidat untuk menghapus data tersebut dari database.
 
-### Penjelasan Desain Tampilan Program
-Untuk desain tampilan, Koleksi Aing dibuat dalam bentuk website dengan beberapa komponen antarmuka yang memiliki fungsi masing-masing.
-- Dashboard digunakan untuk menampilkan ringkasan data koleksi, seperti total jenis produk, total unit, jumlah brand, dan total nilai pembelian.
-- Navigasi digunakan untuk berpindah dari satu halaman ke halaman lainnya, seperti dashboard, produk, brand, dan kategori.
-- Form input digunakan untuk memasukkan data baru maupun mengubah data yang sudah tersedia.
-- Tabel produk digunakan untuk menampilkan daftar produk yang tersimpan di dalam database.
-- Halaman detail produk digunakan untuk menampilkan informasi produk secara lebih lengkap, termasuk gambar produk.
-- Halaman brand dan kategori digunakan untuk menampilkan serta mengelola data brand dan kategori.
+Selain halaman Kandidat, terdapat halaman Departemen yang dapat diakses melalui tombol navigasi Departemen. Halaman ini menggunakan index.php dengan parameter halaman untuk menentukan bagian yang akan ditampilkan, kemudian memanggil PresenterDepartemen.
 
-Tampilan website juga menggunakan CSS untuk mengatur warna, ukuran, tata letak, jenis font, dan responsivitas tampilan. Selain itu, terdapat fitur dark mode yang memungkinkan pengguna mengubah tampilan website menjadi tema gelap.
+Pada halaman Departemen, pengguna dapat melihat, menambahkan, mengubah, dan menghapus data departemen. Proses pengelolaan data dilakukan melalui PresenterDepartemen yang berkomunikasi dengan TabelDepartemen untuk mengambil maupun mengubah data di database. Hasil pengolahan data kemudian dikirimkan ke ViewDepartemen untuk ditampilkan kepada pengguna.
 
-Dengan adanya pembagian halaman dan komponen tersebut, pengguna dapat mengelola koleksi figure melalui tampilan yang lebih terstruktur dan mudah digunakan.
+Setelah proses tambah, edit, atau hapus dilakukan, program mengarahkan pengguna kembali ke halaman terkait agar data terbaru dapat ditampilkan.
+
+Program ini menggunakan database MySQL dengan nama mvp_kandidat_db sebagai tempat penyimpanan seluruh data.
+
+Database tersebut memiliki dua tabel utama, yaitu:
+
+Tabel kandidat: Menyimpan informasi kandidat yang terdiri dari ID, nama, posisi, domisili, skor tes, dan pengalaman tahun.
+
+Tabel departemen: Menyimpan informasi departemen yang terdiri dari ID departemen, nama departemen, nama ketua departemen, dan lokasi departemen.
+
+Koneksi database dikelola melalui class DB yang terdapat pada folder models. Sementara itu, class TabelKandidat dan TabelDepartemen menggunakan class DB untuk menjalankan query ke database. Dengan demikian, proses koneksi dan pengolahan database dilakukan melalui class yang sudah disediakan tanpa harus menuliskan koneksi database secara berulang pada setiap class Model.
+
+### Desain Framework
+
+<img src="Diagram.png" width="100%">
+
 
 # Dokumentasi
 
-## Input
-<img src="Dokumentasi/tambah.gif" width="100%">
+## page kandidat
+<img src="Dokumentasipage Kandidat.gif" width="100%">
 
-## Update
-<img src="Dokumentasi/update.gif" width="100%">
-
-## Delete
-<img src="Dokumentasi/hapus.gif" width="100%">
-
-## Tampilan detail
-<img src="Dokumentasi/Tampilan Detail.gif" width="100%">
-
-## Dashboard
-<img src="Dokumentasi/dashboard.png" width="100%">
+## page departemen
+<img src="Dokumentasi/page Departemen.gif" width="100%">
