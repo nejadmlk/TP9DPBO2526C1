@@ -124,7 +124,7 @@ Koneksi database dikelola melalui class DB yang terdapat pada folder models. Sem
 # Dokumentasi
 
 ## page kandidat
-<img src="Dokumentasi/page Kandidat.gif" width="100%">
+<img src="Dokumentasi/Page Kandidat.gif" width="100%">
 
 ## page departemen
-<img src="Dokumentasi/page Departemen.gif" width="100%">
+<img src="Dokumentasi/Page Departemen.gif" width="100%">
